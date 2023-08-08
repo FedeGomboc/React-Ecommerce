@@ -1,20 +1,22 @@
-import Header from "./components/Header.js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Contacto from "./components/Contacto.js";
-import Productos from "./components/Productos.js";
-import Home from "./components/Home.js";
+import './App.css';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Products from './components/Products';
+import Product from './components/Product';
+import Footer from './components/Footer';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Header />}>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/productos" element={<Productos />}></Route>
-          <Route path="/contacto" element={<Contacto />}></Route>
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<Product />} />
       </Routes>
-    </BrowserRouter>
+      <Footer />
+    </>
   );
 }
 
