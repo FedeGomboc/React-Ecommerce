@@ -29,7 +29,7 @@ function Products() {
     const Loading = () => {
         return (
             <>
-                <div className="col-md-3 my-3">
+                <div className="col-md-3 my-3" style={{ marginTop: "66px" }}>
 
                     <div className="position-sticky" style={{ top: "100px" }}>
                         <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
@@ -81,7 +81,7 @@ function Products() {
     const ShowProducts = () => {
         return (
             <>
-                <div className="col-md-3 my-3">
+                <div className="col-md-3 my-3" style={{ marginTop: "66px" }}>
 
                     <div className="position-sticky" style={{ top: "100px" }}>
                         <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
@@ -93,11 +93,11 @@ function Products() {
 
                 </div>
 
-                <div className="col-md-9 py-md-3">
+                <div className="col-md-9 py-md-3" style={{ marginTop: "66px" }}>
                     <div className="row">
                         {filter.map((product) => {
                             return (
-                                <div className="col-6 col-md-6 col-lg-4 mb-3" key={product.id}>
+                                <div className="col-6 col-md-6 col-lg-4 mb-3" key={product.id} >
 
                                     <div className="card h-100">
                                         <img src={product.image} className="m-3" style={{ height: "300px", width: "auto", objectFit: "contain" }} alt={product.title} />
@@ -130,7 +130,7 @@ function Products() {
     return (
         <div className="container">
             <div className="row">
-                {loading ? <Loading /> : <ShowProducts />}
+                {loading ? <Loading/> : <ShowProducts />}
             </div>
         </div>
     )
