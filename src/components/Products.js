@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+
 
 function Products() {
 
@@ -12,13 +14,23 @@ function Products() {
         let componentMounted = true;
         const getProdcuts = async () => {
             setLoading(true);
-            const response = await fetch('https://fakestoreapi.com/products');
-            if (componentMounted) {
-                const data = await response.json();
-                setData(data);
-                setFilter(data);
+            axios
+            .get(`https://dummyjson.com/products/`)
+            .then((result) => {
+              
+              const response = result.data.products
+              console.log(result.data.products)
+              if (componentMounted) {
+              
+                setData(response);
+                setFilter(response);
                 setLoading(false);
             }
+              
+            }).catch((error) => {
+              console.log(error);
+            });
+
             return () => {
                 componentMounted = false;
             }
@@ -85,10 +97,12 @@ function Products() {
 
                     <div className="position-sticky" style={{ top: "100px" }}>
                         <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("women's clothing")}>Women's Clothing</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("men's clothing")}>Men's Clothing</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("jewelery")}>Jewelery</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("electronics")}>Electronics</button>
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("smartphones")}>Smartphones</button>
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("laptops")}>Laptops</button>
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("fragrances")}>Fragrances</button>
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("skincare")}>Skincare</button>
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("groceries")}>Groceries</button>
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("home-decoration")}>Home-decoration</button>
                     </div>
 
                 </div>
@@ -100,7 +114,7 @@ function Products() {
                                 <div className="col-6 col-md-6 col-lg-4 mb-3" key={product.id} >
 
                                     <div className="card h-100">
-                                        <img src={product.image} className="m-3" style={{ height: "300px", width: "auto", objectFit: "contain" }} alt={product.title} />
+                                        <img src={product.images[0]} className="m-3" style={{ height: "300px", width: "auto", objectFit: "contain" }} alt={product.title} />
                                         <div className="m-3 mb-0">
                                             <small className="card-title">{product.title.substring(0, 50)}...</small>
                                         </div>

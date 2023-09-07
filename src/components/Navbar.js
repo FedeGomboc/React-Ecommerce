@@ -8,7 +8,7 @@ const Navbar = () => {
             <nav className="navbar bg-light fixed-top shadow">
                 <div className="container-fluid container">
                     <Link to="/">
-                        <img src="/FakeShop.png" alt="logo" style={{ height: "50px" }} />
+                        <p>Home</p>
                     </Link>
                     <Link to="/products">
                         <p>Productos</p>
