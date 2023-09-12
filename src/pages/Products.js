@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-
+import { CategoriasContext} from '../context/CategoriasContext';
 
 function Products() {
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [filter, setFilter] = useState(data);
+    const {categorias} = useContext(CategoriasContext)
 
     useEffect(() => {
         let componentMounted = true;
@@ -38,53 +39,6 @@ function Products() {
         getProdcuts();
     }, []);
 
-    const Loading = () => {
-        return (
-            <>
-                <div className="col-md-3 my-3" style={{ marginTop: "66px" }}>
-
-                    <div className="position-sticky" style={{ top: "100px" }}>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("women's clothing")}>Women's Clothing</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("men's clothing")}>Men's Clothing</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("jewelery")}>Jewelery</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("electronics")}>Electronics</button>
-                    </div>
-
-                </div>
-
-                <div className="col-md-9 py-md-3">
-                    <div className="row">
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>
-                        <div className="col-6 col-md-6 col-lg-4 mb-3">
-                            <Skeleton height={400} width={"100%"}/>
-                        </div>  
-                    </div>
-
-                </div>
-
-
-            </>
-        )
-    }
-
     const filterProduct = (category) => {
         const updateList = data.filter((x) => x.category === category);
         setFilter(updateList);
@@ -96,13 +50,10 @@ function Products() {
                 <div className="col-md-3 my-3" style={{ marginTop: "66px" }}>
 
                     <div className="position-sticky" style={{ top: "100px" }}>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("smartphones")}>Smartphones</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("laptops")}>Laptops</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("fragrances")}>Fragrances</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("skincare")}>Skincare</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("groceries")}>Groceries</button>
-                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct("home-decoration")}>Home-decoration</button>
+                    <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
+                        {categorias.map(categoria=>(
+                            <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct(`${categoria}`)}>{categoria}</button>
+                        ))}   
                     </div>
 
                 </div>
@@ -144,7 +95,7 @@ function Products() {
     return (
         <div className="container">
             <div className="row">
-                {loading ? <Loading/> : <ShowProducts />}
+                <ShowProducts />
             </div>
         </div>
     )
