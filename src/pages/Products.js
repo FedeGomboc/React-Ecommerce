@@ -1,43 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Skeleton from 'react-loading-skeleton';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import { CategoriasContext} from '../context/CategoriasContext';
+import { CategoriasContext } from '../context/CategoriasContext';
+import { ProductosContext } from '../context/ProductosContext';
 
 function Products() {
 
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [filter, setFilter] = useState(data);
-    const {categorias} = useContext(CategoriasContext)
+    const { categorias } = useContext(CategoriasContext)
+    const { products } = useContext(ProductosContext)
 
-    useEffect(() => {
-        let componentMounted = true;
-        const getProdcuts = async () => {
-            setLoading(true);
-            axios
-            .get(`https://dummyjson.com/products/`)
-            .then((result) => {
-              
-              const response = result.data.products
-              console.log(result.data.products)
-              if (componentMounted) {
-              
-                setData(response);
-                setFilter(response);
-                setLoading(false);
+    useEffect(() => {            
+            if (products !== null || products !== undefined){
+                setData(products)
+                setFilter(products)
             }
-              
-            }).catch((error) => {
-              console.log(error);
-            });
-
-            return () => {
-                componentMounted = false;
-            }
-        }
-        getProdcuts();
-    }, []);
+    }, [products]);
 
     const filterProduct = (category) => {
         const updateList = data.filter((x) => x.category === category);
@@ -50,10 +28,10 @@ function Products() {
                 <div className="col-md-3 my-3" style={{ marginTop: "66px" }}>
 
                     <div className="position-sticky" style={{ top: "100px" }}>
-                    <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
-                        {categorias.map(categoria=>(
+                        <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => setFilter(data)}>All</button>
+                        {categorias.map(categoria => (
                             <button className="btn btn-outline-dark m-1 btn-sm" onClick={() => filterProduct(`${categoria}`)}>{categoria}</button>
-                        ))}   
+                        ))}
                     </div>
 
                 </div>
@@ -84,10 +62,7 @@ function Products() {
                             )
                         })}
                     </div>
-
                 </div>
-
-
             </>
         )
     }

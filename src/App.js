@@ -5,9 +5,11 @@ import Product from './components/Product';
 import { Route, Routes } from 'react-router-dom';
 import Contacto from './pages/Contacto';
 import CategoriasProvider from './context/CategoriasContext';
+import ProductosProvider from './context/ProductosContext';
 
 function App() {
   return (
+    <ProductosProvider>
     <CategoriasProvider>
       <Navbar />
       <Routes>
@@ -17,6 +19,7 @@ function App() {
         <Route path="/contacto" element={<Contacto />} />
       </Routes>
     </CategoriasProvider>
+    </ProductosProvider>
   );
 }
 

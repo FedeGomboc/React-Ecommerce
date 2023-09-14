@@ -117,8 +117,6 @@ function Product() {
                         in {product.category}
                       </span>
                       <h5 className="text-uppercase">{product.title}</h5>
-                      Rating {product.rating && product.rating.rate}
-                      <i className="fa fa-star text-warning"></i>
                       <div className="price d-flex flex-row align-items-center">
                         <big className="display-6">
                           <b>${product.price}</b>
