@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import Contacto from './pages/Contacto';
 import CategoriasProvider from './context/CategoriasContext';
 import ProductosProvider from './context/ProductosContext';
+import Carrito from './pages/Carrito';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/contacto" element={<Contacto />} />
+        <Route path="/carrito" element={<Carrito />} />
       </Routes>
     </CategoriasProvider>
     </ProductosProvider>

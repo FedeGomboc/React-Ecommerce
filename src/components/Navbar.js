@@ -16,9 +16,11 @@ const Navbar = () => {
                     <Link to="/contacto">
                         <p>Contacto</p>
                     </Link>
+                    <Link to="/carrito">
                     <button className="navbar-toggler" type="button">
                         <i className="fa fa-shopping-cart"></i>
                     </button>
+                    </Link>
                 </div>
             </nav>
         </div>
