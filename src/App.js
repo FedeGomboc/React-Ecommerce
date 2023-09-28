@@ -7,9 +7,11 @@ import Contacto from './pages/Contacto';
 import CategoriasProvider from './context/CategoriasContext';
 import ProductosProvider from './context/ProductosContext';
 import Carrito from './pages/Carrito';
+import CarritoProvider from './context/CarritoContext'
 
 function App() {
   return (
+    <CarritoProvider>
     <ProductosProvider>
     <CategoriasProvider>
       <Navbar />
@@ -22,6 +24,7 @@ function App() {
       </Routes>
     </CategoriasProvider>
     </ProductosProvider>
+    </CarritoProvider>
   );
 }
 

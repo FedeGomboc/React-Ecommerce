@@ -280,3 +280,9 @@
     cursor: pointer;
     border-bottom: 1px solid #E44C4C;
    }
+   .botonCarrito{
+    height: 50px;
+    width: 150px;
+    border-radius: 90px;  
+    margin-top: 20px;
+   }

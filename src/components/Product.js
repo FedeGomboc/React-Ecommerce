@@ -4,13 +4,14 @@ import Skeleton from "react-loading-skeleton";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { CategoriasContext } from "../context/CategoriasContext";
-
+import { CarritoContext } from "../context/CarritoContext";
 
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const {categories} = useContext(CategoriasContext)
+  const {agregarProducto} = useContext(CarritoContext)
 
   useEffect(() => {
     const getProduct = async () => {
@@ -126,7 +127,7 @@ function Product() {
                     <p className="text-muted">{product.description}</p>
                     <div className="cart mt-4 align-items-center">
                       {" "}
-                      <button className="btn btn-outline-dark text-uppercase mr-2 px-4">
+                      <button className="btn btn-outline-dark text-uppercase mr-2 px-4" onClick={() => agregarProducto(product)}>
                         Buy
                       </button>{" "}
                     </div>
