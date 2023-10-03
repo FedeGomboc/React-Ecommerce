@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
-import Product from "../components/Product";
+import ProductCard from "../components/ProductCard";
 
 export default function Carrito() {
 
@@ -16,7 +16,7 @@ export default function Carrito() {
       </div>
       <div className="row">
         {productos.map((product, index) => {
-          return <Product product={product} key={index} />;
+          return <ProductCard product={product} key={index} />;
         })}
       </div>
     </div>
